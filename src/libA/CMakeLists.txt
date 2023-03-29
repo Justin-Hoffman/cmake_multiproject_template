@@ -3,6 +3,8 @@ project(libA LANGUAGES C CXX)
 
 add_library(libA SHARED)
 
+set(CMAKE_CXX_STANDARD 20)
+
 target_sources(libA
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src/A.cpp

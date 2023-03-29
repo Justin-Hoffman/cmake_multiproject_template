@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.11)
 project(exe LANGUAGES C CXX)
 
+set(CMAKE_CXX_STANDARD 20)
+
 message(${CMAKE_PREFIX_PATH})
 find_package(libA REQUIRED)
 find_package(libB REQUIRED)
