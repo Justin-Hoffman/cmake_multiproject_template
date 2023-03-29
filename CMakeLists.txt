@@ -13,6 +13,23 @@ ExternalProject_Add(
     BUILD_ALWAYS TRUE
 )
 
+ExternalProject_Get_Property(libA BINARY_DIR)
+ExternalProject_Add_Step(libA package
+    COMMAND cmake --build ${BINARY_DIR} --target package
+    WORKING_DIRECTORY ${BINARY_DIR}
+    ALWAYS TRUE
+    EXCLUDE_FROM_MAIN TRUE
+)
+ExternalProject_Add_StepTargets(libA package package)
+ExternalProject_Add_Step(libA test
+    COMMAND cmake --build ${BINARY_DIR} --target test
+    WORKING_DIRECTORY ${BINARY_DIR}
+    ALWAYS TRUE
+    EXCLUDE_FROM_MAIN TRUE
+)
+ExternalProject_Add_StepTargets(libA test test)
+
+
 ExternalProject_Add(
     libB
     SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/libB
@@ -20,6 +37,21 @@ ExternalProject_Add(
         -DCMAKE_INSTALL_PREFIX=${HOST_INSTALL_PREFIX}
     BUILD_ALWAYS TRUE
 )
+ExternalProject_Get_Property(libB BINARY_DIR)
+ExternalProject_Add_Step(libB package
+    COMMAND cmake --build ${BINARY_DIR} --target package
+    WORKING_DIRECTORY ${BINARY_DIR}
+    ALWAYS TRUE
+    EXCLUDE_FROM_MAIN TRUE
+)
+ExternalProject_Add_StepTargets(libB package package)
+ExternalProject_Add_Step(libB test
+    COMMAND cmake --build ${BINARY_DIR} --target test
+    WORKING_DIRECTORY ${BINARY_DIR}
+    ALWAYS TRUE
+    EXCLUDE_FROM_MAIN TRUE
+)
+ExternalProject_Add_StepTargets(libB test test)
 
 
 ExternalProject_Add(

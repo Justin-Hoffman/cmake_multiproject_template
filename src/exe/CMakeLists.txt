@@ -30,3 +30,21 @@ install(TARGETS exe EXPORT exeConfig
         ARCHIVE DESTINATION lib)
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION include )
 install(EXPORT exeConfig NAMESPACE exe:: DESTINATION lib/cmake/exe)
+
+include(../../cmake/common.cmake)
+
+configure_cpack_package(
+    NAME "exe"
+    DESCRIPTION "exe - An Example"
+    ARCHITECTURE "amd64"
+    DEPENDS "libstdc++6 (>= 4.9), libc6 (>= 2.17)"
+    GENERATOR "DEB"
+)
+
+configure_cpack_package(
+    NAME "exe"
+    DESCRIPTION "exe - An Example"
+    ARCHITECTURE "amd64"
+    DEPENDS "libstdc++6 (>= 4.9), libc6 (>= 2.17)"
+    GENERATOR "RPM"
+)
