@@ -3,7 +3,6 @@ project(exe LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 
-message(${CMAKE_PREFIX_PATH})
 find_package(libA REQUIRED)
 find_package(libB REQUIRED)
 
@@ -31,20 +30,9 @@ install(TARGETS exe EXPORT exeConfig
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION include )
 install(EXPORT exeConfig NAMESPACE exe:: DESTINATION lib/cmake/exe)
 
-include(../../cmake/common.cmake)
+include(CPack)
 
-configure_cpack_package(
-    NAME "exe"
-    DESCRIPTION "exe - An Example"
-    ARCHITECTURE "amd64"
-    DEPENDS "libstdc++6 (>= 4.9), libc6 (>= 2.17)"
-    GENERATOR "DEB"
-)
+message(${CPACK_GENERATOR})
 
-configure_cpack_package(
-    NAME "exe"
-    DESCRIPTION "exe - An Example"
-    ARCHITECTURE "amd64"
-    DEPENDS "libstdc++6 (>= 4.9), libc6 (>= 2.17)"
-    GENERATOR "RPM"
-)
+include (CTest)
+enable_testing()
